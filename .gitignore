@@ -1,5 +1,6 @@
 # Created by http://www.gitignore.io
 
+.eggs
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
