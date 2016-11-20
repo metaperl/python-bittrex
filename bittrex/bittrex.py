@@ -200,7 +200,7 @@ class Bittrex(object):
         """
         return self.api_query('buylimit', {'market': market, 'quantity': quantity, 'rate': rate})
 
-    def sell_market(self, market, quantity, rate):
+    def sell_market(self, market, quantity):
         """
         Used to place a sell order in a specific market. Use sellmarket to place
         market orders. Make sure you have the proper permissions set on your
@@ -221,7 +221,7 @@ class Bittrex(object):
         :return:
         :rtype : dict
         """
-        return self.api_query('sellmarket', {'market': market, 'quantity': quantity, 'rate': rate})
+        return self.api_query('sellmarket', {'market': market, 'quantity': quantity})
 
     def sell_limit(self, market, quantity, rate):
         """
@@ -260,7 +260,7 @@ class Bittrex(object):
         """
         return self.api_query('cancel', {'uuid': uuid})
 
-    def get_open_orders(self, market):
+    def get_open_orders(self, market=""):
         """
         Get all orders that you currently have opened. A specific market can be requested
 
