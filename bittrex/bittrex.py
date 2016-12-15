@@ -108,14 +108,20 @@ class Bittrex(object):
         """
         return self.api_query('getticker', {'market': market})
 
-    def get_market_summaries(self):
+    def get_market_summaries(self, by_market=False):
         """
         Used to get the last 24 hour summary of all active exchanges
 
         :return: Summaries of active exchanges in JSON
         :rtype : dict
         """
-        return self.api_query('getmarketsummaries')
+        retval = self.api_query('getmarketsummaries')
+
+        if by_market:
+            r = dict()
+            for market in retval['result']:
+                r[market['MarketName']] = market
+            return r
 
     def get_orderbook(self, market, depth_type, depth=20):
         """
