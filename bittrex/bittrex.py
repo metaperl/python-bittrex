@@ -115,13 +115,16 @@ class Bittrex(object):
         :return: Summaries of active exchanges in JSON
         :rtype : dict
         """
-        retval = self.api_query('getmarketsummaries')
+        summaries = self.api_query('getmarketsummaries')
 
         if by_market:
             r = dict()
-            for market in retval['result']:
+            for market in summaries['result']:
                 r[market['MarketName']] = market
             return r
+        else:
+            return summaries
+
 
     def get_orderbook(self, market, depth_type, depth=20):
         """
