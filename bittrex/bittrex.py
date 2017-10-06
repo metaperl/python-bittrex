@@ -64,9 +64,9 @@ class Bittrex(object):
         elif method in self.account_set:
             request_url = (base_url % 'account') + method + '?apikey=' + self.api_key + "&nonce=" + nonce + '&'
 
-        request_url += urllib.urlencode(options)
+        request_url += urllib.parse.urlencode(options)
 
-        signature = hmac.new(self.api_secret.encode(), request_url.encode(), hashlib.sha512).hexdigest()
+        signature = hmac.new(self.api_secret.encode('utf-8'), request_url.encode('utf-8'), hashlib.sha512).hexdigest()
 
         headers = {"apisign": signature}
 
@@ -279,7 +279,7 @@ class Bittrex(object):
         :type market: str
 
         :return: Open orders info in JSON
-        :rtype : dict
+        :rtype : list of dict
         """
         return self.api_query('getopenorders', {'market': market})
 
